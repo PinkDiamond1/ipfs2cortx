@@ -2,15 +2,7 @@
 
 This web(3) app provides a bridge between IPFS with it's incentive-layer blockchain FileCoin and the massive-data storage system CORTX.
 
-Main Features:
-    - Inspect CID content if available ✅ 
-    - fetch data from IPFS through it's CID ✅
-    - deploy to CORTX file-system using S3 interface 📦
-    - List deployed files from CORTX file-system 📦
-    - authenticate using FileCoin 📦
-    - assign user-specific bucket 📦
-    - invert bridge 📦
-
+Main Features: - Inspect CID content if available ✅ - fetch data from IPFS through it's CID ✅ - deploy to CORTX file-system using S3 interface 📦 - List deployed files from CORTX file-system 📦 - authenticate using FileCoin 📦 - assign user-specific bucket 📦 - invert bridge 📦
 
 ## Get Started 🚀
 
@@ -48,9 +40,9 @@ Switching this to `local` will make it connectable.
 
 ## AWS S3
 
--   bucket names must be lowercase.
--   CORS can be upadted with Callback
--   CORS policy should look like [this](https://docs.amazonaws.cn/en_us/AmazonS3/latest/userguide/ManageCorsUsing.html)
+- bucket names must be lowercase.
+- CORS can be upadted with Callback
+- CORS policy should look like [this](https://docs.amazonaws.cn/en_us/AmazonS3/latest/userguide/ManageCorsUsing.html)
 
 THISSS: https://docs.aws.amazon.com/AmazonS3/latest/userguide/example_s3_PutBucketCors_section.html
 

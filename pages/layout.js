@@ -1,26 +1,17 @@
 import Image from 'next/image'
 import Header from '../components/Header'
-import { IpfsComponent } from "/components/Ipfs/ipfsClient"
-
-
+import { IpfsComponent } from '/components/Ipfs/ipfsClient'
 
 export default function HomeWrapper({ children }) {
   return (
     <div>
       <Header />
-      <main>
-        {children}
-      </main>
+      <main>{children}</main>
 
-      <footer
-        className='text-xs'
-      >
+      <footer className="text-xs">
         <IpfsComponent></IpfsComponent>
 
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a target="_blank" rel="noopener noreferrer">
           {/* <span>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span> */}

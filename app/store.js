@@ -3,8 +3,8 @@ import counterReducer from './counterSlice'
 import ipfsReduxReducer from './ipfsSlice'
 
 export default configureStore({
-    reducer: {
-        counter: counterReducer,
-        ipfsRedux: ipfsReduxReducer,
-    },
+  reducer: {
+    counter: counterReducer,
+    ipfsRedux: ipfsReduxReducer,
+  },
 })
