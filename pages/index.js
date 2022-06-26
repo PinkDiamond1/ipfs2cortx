@@ -7,7 +7,9 @@ import { S3Box } from '../components/Aws/S3box'
 import { S3React } from '../components/Aws/S3React'
 import IpfsInput from '../components/Ipfs/IpfsInput'
 
+
 export default function Home() {
+
   return (
     <HomeWrapper>
       <div className="flex mr-11">

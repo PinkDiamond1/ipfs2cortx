@@ -13,12 +13,7 @@ export default function Header() {
             <Box className="absolute inset-y-0 left-0 flex items-center sm:hidden"></Box>
             <Box className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
               <Box className="flex-shrink-0 flex items-center text-white">
-                {/* <img
-                                    className="h-6 w-auto"
-                                    src="https://supabase.com/images/logo-dark.png"
-                                    alt="supabase"
-                                /> */}
-                <Image width={291} height={70} src="/cortx_challenge.png" />
+                <Image width={210} height={66} src="/cortx_challenge.png" alt='CORTXsvg'/>
               </Box>
               <Box className="hidden sm:block sm:ml-6"></Box>
             </Box>

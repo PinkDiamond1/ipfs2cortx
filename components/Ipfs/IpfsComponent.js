@@ -1,6 +1,7 @@
 // This components requires a local IPFS node running on port 5001.
 import { useState, useEffect } from 'react'
 import { create } from 'ipfs-http-client'
+import { create as create4Browser } from 'ipfs-core'
 import { Box, Button, Input, InputGroup, InputLeftElement, Table, Text } from '@chakra-ui/react'
 import { useSelector, useDispatch } from 'react-redux'
 import Image from 'next/image'
@@ -20,20 +21,29 @@ export function IpfsComponent(props) {
     const init = async () => {
       if (ipfs) return
 
-      const node = await create({
-        url: 'http://localhost:5001/api/v0',
-        // url: 'http://127.0.0.1:45005/api/v0',
-      })
-      const nodeId = await node.id()
-      const nodeVersion = await node.version()
-      const nodeIsOnline = node.isOnline()
+      let node
+      if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+        console.log("Running on localhost!")
+        node = await create({
+          url: 'http://localhost:5001/api/v0',
+          // url: 'http://127.0.0.1:45005/api/v0',
+        })
+      } else {
+        node = await create4Browser()
+      }
+      if (node) {
 
-      setIpfs(node)
-      setId(nodeId.id)
-      setVersion(nodeVersion.version)
-      setIsOnline(nodeIsOnline)
+        const nodeId = await node.id()
+        const nodeVersion = await node.version()
+        const nodeIsOnline = node.isOnline()
 
-      dispatch(setIpfsDaemon({ node, toast }))
+        setIpfs(node)
+        setId(nodeId.id)
+        setVersion(nodeVersion.version)
+        setIsOnline(nodeIsOnline)
+
+        dispatch(setIpfsDaemon({ node, toast }))
+      }
     }
 
     init()
@@ -47,19 +57,6 @@ export function IpfsComponent(props) {
 
   if (!ipfs) {
     return <div className="f5 ma0 pb2 aqua fw4 montserrat">Connecting to IPFS...</div>
-  }
-
-  async function handleGetFile() {
-    //  Get the file from IPFS
-    // let response = ipfsState.ipfsDaemon.get(state.CID)
-    // const response = await ipfs.ls('QmcRD4wkPPi6dig81r5sLj9Zm1gDCL4zgpEj9CfuRrGbzF')
-    // // let response = await ipfsState.ipfsDaemon.ls('QmPChd2hVbrJ6bfo3WBcTW4iZnpHm8TEzWkLHmLpXhF68A')
-    // console.log(response)
-    const cid = 'QmQ2r6iMNpky5f1m4cnm3Yqw8VSvjuKpTcK1X7dBR1LkJF'
-
-    for await (const file of ipfs.ls(cid)) {
-      console.log(file)
-    }
   }
 
   console.log(id)
@@ -77,9 +74,6 @@ export function IpfsComponent(props) {
           <h4 data-test="status">{isOnline ? 'Online' : 'Offline'}</h4>
         </Box>
       </Box>
-      <Button onClick={handleGetFile}>Click</Button>
     </div>
   )
 }
-
-export default IpfsComponent
