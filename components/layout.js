@@ -12,7 +12,7 @@ export default function HomeWrapper({ children }) {
   const bg = useColorModeValue('bg-mybg-light', 'bg-mybg-dark')
 
   return (
-    <div className={`h-screen flex flex-col justify-between bg-fixed overflow-scroll ${store.mode} ${bg}`}>
+    <div className={`h-screen flex flex-col justify-between bg-fixed overflow-scroll scroll-smooth ${store.mode} ${bg}`}>
       <Head />
       <Header />
       <main className="z-10 mb-auto">{children}</main>

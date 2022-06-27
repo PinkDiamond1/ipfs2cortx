@@ -61,6 +61,16 @@ Switching this to `local` will make it connectable.
 - CORS can be upadted with Callback
 - CORS policy should look like [this](https://docs.amazonaws.cn/en_us/AmazonS3/latest/userguide/ManageCorsUsing.html)
 
+**Update:**
+
+CORSpolicy only concerns the incoming requests. There is no obvious way to have the bucket sign the the response with the incoming origin.
+That leaves us with the only option to go ServerSide, which also holds the benefit that it doesn't disclose the env variables to the browser.
+
+Instead of messing with CORS policy, we now try `getServerSideProps()` and as plan B set up a proxy-server API.
+
+We got thisss, 16h to go.
+
+
 THISSS: https://docs.aws.amazon.com/AmazonS3/latest/userguide/example_s3_PutBucketCors_section.html
 
 [This dude](https://www.youtube.com/watch?v=hxyp_LkKDdk) uses an VPN to get a signed header.

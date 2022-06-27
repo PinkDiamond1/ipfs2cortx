@@ -8,6 +8,8 @@ import { v4 as uuid } from 'uuid';
 import { converterBase2 } from 'byte-converter'
 import { BezierSpinner } from '../Spinner/BezierSpinner'
 import { selectFile } from '../../app/ipfsSlice'
+import prettyBytes from 'pretty-bytes';
+
 
 
 export const IpfsCard = ({ ls }) => {
@@ -41,9 +43,7 @@ export const IpfsCard = ({ ls }) => {
     }, [result, dispatch, ls])
 
 
-    const fileSize = (ls['size'])
-        ? converterBase2(ls['size'], 'B', 'MB').toFixed(3).toString() + ' MB'
-        : 'unknown'
+    const fileSize = (ls['size']) ? prettyBytes(ls['size']) : 'unknown'
 
     const [hoverStyle, setHoverStyle] = useState(' bg-opacity-10 hover:cursor-pointer hover:bg-opacity-20 hover:scale-105')
     useEffect(() => {
