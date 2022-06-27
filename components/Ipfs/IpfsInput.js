@@ -33,7 +33,7 @@ export default function IpfsInput() {
   return (
     <>
       <Box className="m-3 sticky top-28 z-50">
-        {!store.currentCid && (
+        {store.currentCid && (
           <div className="min-w-fit mr-3 align-text-bottom mb-3 font-semibold">
             Paste your IPFS CID:
           </div>

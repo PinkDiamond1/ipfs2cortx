@@ -19,7 +19,20 @@ export function IpfsComponent() {
   useEffect(() => {
     const init = async () => {
       // TODO:Check if node is offline or ID has changed
-      if (ipfs) return
+      if (ipfs) {
+        try {
+          const nodeId = await ipfs.id()
+          const nodeVersion = await ipfs.version()
+          const nodeIsOnline = await ipfs.isOnline()
+
+          setId(nodeId.id.string)
+          setVersion(nodeVersion.version)
+          setIsOnline(nodeIsOnline)
+        } catch (e) {
+          console.error(e)
+        }
+        return
+      }
 
       let node
       // if (false) {
