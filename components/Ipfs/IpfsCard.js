@@ -26,7 +26,7 @@ export const IpfsCard = ({ ls }) => {
 
     function onCardClick() {
         // Download the clicked file
-        trigger({ ipfs: store.ipfsDaemon, cid: ls.cid }, true)
+        trigger({cid: ls.cid }, true)
     }
 
 

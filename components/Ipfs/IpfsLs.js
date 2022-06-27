@@ -10,7 +10,7 @@ import { IpfsCard } from './IpfsCard'
 export default function IpfsLs() {
   const store = useSelector((state) => state.ipfsRedux)
   const toast = useMyToast()
-  const { data, error, isLoading, isError } = useLsCidQuery({ ipfs: store.ipfsDaemon, cid: store.cid })
+  const { data, error, isLoading, isError } = useLsCidQuery({cid: store.cid })
 
   useEffect(() => {
     if (isError) {
