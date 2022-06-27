@@ -2,7 +2,17 @@
 
 This web(3) app provides a bridge between IPFS with it's incentive-layer blockchain FileCoin and the massive-data storage system CORTX.
 
-Main Features: - Inspect CID content if available ✅ - fetch data from IPFS through it's CID ✅ - deploy to CORTX file-system using S3 interface 📦 - List deployed files from CORTX file-system 📦 - authenticate using FileCoin 📦 - assign user-specific bucket 📦 - invert bridge 📦
+Main Features:
+
+- Inspect CID content if available ✅
+- fetch data from IPFS through it's CID ✅
+- deploy to CORTX file-system using S3 interface 📦
+- List deployed files from CORTX file-system 📦
+- authenticate using FileCoin 📦
+- assign user-specific bucket 📦
+- invert bridge 📦
+
+[Live Demo](https://cortxportal.netlify.app/)
 
 ## Get Started 🚀
 
@@ -17,6 +27,13 @@ Make sure your CORTX cluster is running and available. In case of [cloudshare](h
 ## Resources
 
 [AWS for React](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/getting-started-react-native.html)
+
+### Color palette
+
+Used the [IPFS color pallette](https://github.com/ipfs-shipyard/ipfs-css/blob/main/theme.json#L2).
+
+[Tailwind animations](https://www.devwares.com/blog/create-animation-with-tailwind-css/)
+
 
 ## IPFS
 

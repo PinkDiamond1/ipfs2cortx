@@ -1,6 +1,7 @@
 import { default as HeadContainer } from 'next/head'
 
 const Head = () => {
+
   return (
     <div>
       <HeadContainer>

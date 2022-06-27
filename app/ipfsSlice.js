@@ -1,14 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { ipfsGetFile } from '../lib/ipfsUtil'
+import { all } from 'it-all'
 
 export const ipfsReduxSlice = createSlice({
   name: 'ipfsRedux',
   initialState: {
     ipfsDaemon: null,
-    currentFile: null,
-    CID: '',
-    name: '',
-    size: '',
+    cid: null,
+    selectedCid: new Array, 
+    selectedFiles: new Array,
     deployed: false,
   },
   reducers: {
@@ -21,22 +20,17 @@ export const ipfsReduxSlice = createSlice({
       }
     },
     setCid: (state, action) => {
-      // Get the name, size and download the file.
-      const { CID, toast } = action.payload
-      state.CID = CID
-      // let response
-      // try {
-      //     // let response = ipfsGetFile(state.ipfsDaemon, CID)
-      //     response = state.ipfsDaemon.object.ls(state.CID)
-      // }
-      // catch (err) { console.log(err) }
-      // console.log(response)
+      // Get the file information from the current cid.
+      const { cid, toast } = action.payload
+      console.log("🚀 ~ file: ipfsSlice.js ~ line 26 ~ cid", cid)
+      state.cid = cid
     },
-    getFile: (state) => {
-      // Download the file from the given CID.
-      let response = state.ipfsDaemon.get(state.CID)
-      console.log(response)
-      // TODO: Unpack and assign
+    selectFile: (state, action) => {
+      const { cid, file} = action.payload
+      state.selectedCid.push(cid)
+      console.log("🚀 ~ file: ipfsSlice.js ~ line 31 ~ selectedCid", selectedCid.length)
+      state.selectedFiles.push(file)
+      
     },
     deployFile: (state) => {
       // Deploy the file to CORTX
@@ -50,6 +44,6 @@ export const ipfsReduxSlice = createSlice({
   },
 })
 
-export const { setIpfsDaemon, setCid, getFile, deployFile, resetFile } = ipfsReduxSlice.actions
+export const { setIpfsDaemon, setCid, selectFile, deployFile, resetFile } = ipfsReduxSlice.actions
 
 export default ipfsReduxSlice.reducer

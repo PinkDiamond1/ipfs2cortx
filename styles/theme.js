@@ -15,7 +15,7 @@ export const myTheme = extendTheme({
   initialColorMode: 'dark',
   fonts: {
     heading: 'Manjari',
-    body: 'Montserrat',
+    body: 'Manjari',
   },
   config: {
     initialColorMode: 'dark',
