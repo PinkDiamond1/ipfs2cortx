@@ -14,14 +14,17 @@ function arrRemoveByIdx(arr, idx) {
   })
 }
 
+// This is neccesary to reset the state
+const initialState = {
+  cid: null,
+  selectedIdx: new Array(),
+  selectedFiles: new Array(),
+  deployed: false,
+}
+
 export const ipfsReduxSlice = createSlice({
   name: 'ipfsRedux',
-  initialState: {
-    cid: null,
-    selectedIdx: new Array(),
-    selectedFiles: new Array(),
-    deployed: false,
-  },
+  initialState,
   reducers: {
     setCid: (state, action) => {
       // Get the file information from the current cid.
@@ -53,12 +56,10 @@ export const ipfsReduxSlice = createSlice({
         state.deployed = true
       }
     },
-    resetFile: (state) => {
-      state = state.initialState
-    },
+    reset: () => initialState,
   },
 })
 
-export const { setCid, selectFile, unselectFile, deployFile, resetFile } = ipfsReduxSlice.actions
+export const { setCid, selectFile, unselectFile, deployFile, reset } = ipfsReduxSlice.actions
 
 export default ipfsReduxSlice.reducer
