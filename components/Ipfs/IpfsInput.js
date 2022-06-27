@@ -16,29 +16,31 @@ export default function IpfsInput() {
     console.log('🚀 ~ file: cidInput.js ~ line 14 ~ handleInput ~ currentCid', currentCid)
     // TODO: check for valid CID
     if (currentCid.length > 11) {
-      const currentCid = 'QmQ2r6iMNpky5f1m4cnm3Yqw8VSvjuKpTcK1X7dBR1LkJF'
+      // const currentCid = 'QmQ2r6iMNpky5f1m4cnm3Yqw8VSvjuKpTcK1X7dBR1LkJF'
       dispatch(setCid({ cid: currentCid, toast }))
     }
   }
 
   return (
     <>
-      <Box className="m-3">
-        <div className="min-w-fit mr-3 align-text-bottom mb-3 font-semibold">Paste your IPFS CID:</div>
+      <Box className="m-3 sticky top-28 z-50">
+        {store.currentCid && <div
+          className="min-w-fit mr-3 align-text-bottom mb-3 font-semibold"
+        >
+          Paste your IPFS CID:
+        </div>}
         <div>
           <InputGroup h="7">
-            <InputLeftElement 
-            h="7" 
-            className=''
+            <InputLeftElement
+              h="7"
+              className=''
             >
               <Image alt="ipfsSmallBox" src="/ipfs-logo.svg" h={41} />
             </InputLeftElement>
-            <Input h="7" onChange={handleInput} placeholder="<myCID>" size='xs' variant='outline'></Input>
+            <Input h="7" rounded='xl' fontWeight='semibold' onChange={handleInput} placeholder={store.currentCid ||"<myCID>"} size='xs' variant='filled'></Input>
           </InputGroup>
         </div>
       </Box>
-      {/* <Button onClick={handleGetFile}>GET FILE</Button> */}
-      {/* <Box>{store.cid || ''}</Box> */}
     </>
   )
 }

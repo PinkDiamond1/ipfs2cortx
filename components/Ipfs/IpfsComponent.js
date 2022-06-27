@@ -5,7 +5,7 @@ import { create as create4Browser } from 'ipfs-core'
 import { Box, Button, Input, InputGroup, InputLeftElement, Table, Text } from '@chakra-ui/react'
 import { useSelector, useDispatch } from 'react-redux'
 import Image from 'next/image'
-import { setIpfsDaemon } from '../../app/ipfsSlice'
+// import { setIpfsDaemon } from '../../app/ipfsSlice'
 import useMyToast from '../../hooks/useMyToast'
 
 export function IpfsComponent(props) {
@@ -44,7 +44,9 @@ export function IpfsComponent(props) {
         setVersion(nodeVersion.version)
         setIsOnline(nodeIsOnline)
 
-        dispatch(setIpfsDaemon({ node, toast }))
+        // dispatch(setIpfsDaemon({ node, toast }))
+        window.ipfsDaemon = node
+        toast('success', ' IPFS node online 🎉', 'scsIN')
       }
     }
     init()

@@ -4,33 +4,35 @@ import { all } from 'it-all'
 export const ipfsReduxSlice = createSlice({
   name: 'ipfsRedux',
   initialState: {
-    ipfsDaemon: null,
+    // ipfsDaemon: null,
     cid: null,
-    selectedCid: new Array, 
+    selectedCid: new Array,
     selectedFiles: new Array,
     deployed: false,
   },
   reducers: {
-    setIpfsDaemon: (state, action) => {
-      // Set the ipfs daemon
-      const { node, toast } = action.payload
-      state.ipfsDaemon = node
-      if (node.isOnline()) {
-        toast('success', ' IPFS node online 🎉', 'scsIN')
-      }
-    },
+    // setIpfsDaemon: (state, action) => {
+    //   // Set the ipfs daemon
+    //   const { node, toast } = action.payload
+    //   state.ipfsDaemon = node
+    //   if (node.isOnline()) {
+    //     toast('success', ' IPFS node online 🎉', 'scsIN')
+    //   }
+    // },
     setCid: (state, action) => {
       // Get the file information from the current cid.
       const { cid, toast } = action.payload
-      console.log("🚀 ~ file: ipfsSlice.js ~ line 26 ~ cid", cid)
       state.cid = cid
     },
     selectFile: (state, action) => {
-      const { cid, file} = action.payload
-      state.selectedCid.push(cid)
-      console.log("🚀 ~ file: ipfsSlice.js ~ line 31 ~ selectedCid", selectedCid.length)
-      state.selectedFiles.push(file)
-      
+      const { cid, file } = action.payload
+      // TODO: check if cid is already in list or make a dict.
+      if (!state.selectedCid.includes(cid)) {
+        state.selectedCid.push(cid)
+        console.log("🚀 ~ file: ipfsSlice.js ~ line 31 ~ selectedCid", state.selectedCid.length)
+        state.selectedFiles.push(file)
+      }
+
     },
     deployFile: (state) => {
       // Deploy the file to CORTX
