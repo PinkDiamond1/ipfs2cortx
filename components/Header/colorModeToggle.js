@@ -4,7 +4,6 @@ import { IoSunnyOutline, IoMoonOutline } from 'react-icons/io5'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleTheme } from '../../app/themeSlice'
 
-
 export function ColorModeToggle() {
   const { colorMode, toggleColorMode } = useColorMode()
   const store = useSelector((state) => state.theme)

@@ -4,31 +4,32 @@ import Head from './Head'
 import { IpfsComponent } from './Ipfs/IpfsComponent'
 import { useSelector, useDispatch } from 'react-redux'
 
-
 export default function HomeWrapper({ children }) {
-
   // Toggle for tailwind. Src https://tailwindcss.com/docs/dark-mode
   const store = useSelector((state) => state.theme)
   const bg = useColorModeValue('bg-mybg-light', 'bg-mybg-dark')
 
   return (
-    <div className={`h-screen flex flex-col justify-between bg-fixed overflow-scroll ${store.mode} ${bg}`}>
+    <div
+      className={`h-screen flex flex-col justify-between bg-fixed overflow-scroll scroll-smooth ${store.mode} ${bg}`}
+    >
       <Head />
       <Header />
       <main className="z-10 mb-auto">{children}</main>
-      <footer className="sticky bottom-0 mb-0 mt-auto w-full z-50 text-left bg-gray-900 text-white text-xs flex pt-1" style={{ 'background-color': 'rgba(0, 0, 0, 0.3)' }}>
+      <footer
+        className="sticky bottom-0 mb-0 mt-auto w-full z-50 text-left bg-gray-900 text-white text-xs flex pt-1"
+        style={{ 'background-color': 'rgba(0, 0, 0, 0.3)' }}
+      >
         <IpfsComponent />
         <div className="ml-auto text-center mx-3 flex">
-          <a
-            className='mt-3'
-          >
-            © 2022 planetary Copyright:
-          </a>
+          <a className="mt-3">© 2022 planetary Copyright:</a>
           <a
             href="https://github.com/3lLobo"
             type="button"
-            className="text-white hover:scale-125 hover:text-aqua-muted transition duration-500 ease-in-out h-5 ml-2 mt-2">
-            <svg aria-hidden="true"
+            className="text-white hover:scale-125 hover:text-aqua-muted transition duration-500 ease-in-out h-5 ml-2 mt-2"
+          >
+            <svg
+              aria-hidden="true"
               focusable="false"
               data-prefix="fab"
               data-icon="github"

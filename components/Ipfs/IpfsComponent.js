@@ -4,12 +4,10 @@ import { create } from 'ipfs-http-client'
 import { create as create4Browser } from 'ipfs-core'
 import { Box, Button, Input, InputGroup, InputLeftElement, Table, Text } from '@chakra-ui/react'
 import { useSelector, useDispatch } from 'react-redux'
-import Image from 'next/image'
 // import { setIpfsDaemon } from '../../app/ipfsSlice'
 import useMyToast from '../../hooks/useMyToast'
 
 export function IpfsComponent(props) {
-
   const [id, setId] = useState(null)
   const [ipfs, setIpfs] = useState(null)
   const [version, setVersion] = useState(null)
@@ -20,7 +18,6 @@ export function IpfsComponent(props) {
 
   useEffect(() => {
     const init = async () => {
-
       // TODO:Check if node is offline or ID has changed
       if (ipfs) return
 
@@ -58,10 +55,9 @@ export function IpfsComponent(props) {
     return <div className={boxStyle}>Connecting to IPFS...</div>
   }
 
-
   return (
     <div>
-      <Box className="flex ">
+      <Box className="flex">
         <Box className={boxStyle}>
           <p data-test="status">IFPS:</p>
           <p data-test="statusv">{isOnline ? '🟢' : '😡'}</p>
