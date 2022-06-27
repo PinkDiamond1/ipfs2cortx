@@ -1,7 +1,7 @@
 import { Box, useColorModeValue } from '@chakra-ui/react'
-import Header from '../components/Header'
-import Head from '../components/Head'
-import { IpfsComponent } from '../components/Ipfs/IpfsComponent'
+import Header from './Header'
+import Head from './Head'
+import { IpfsComponent } from './Ipfs/IpfsComponent'
 import { useSelector, useDispatch } from 'react-redux'
 
 
@@ -12,11 +12,11 @@ export default function HomeWrapper({ children }) {
   const bg = useColorModeValue('bg-mybg-light', 'bg-mybg-dark')
 
   return (
-      <div className={`flex flex-col h-screen justify-between ${store.mode} ${bg}`}>
+      <div className={`h-screen justify-between bg-fixed overflow-scroll ${store.mode} ${bg}`}>
         <Head />
         <Header />
-        <main className="mb-auto">{children}</main>
-        <footer className="text-left bg-gray-900 text-white text-xs flex-grow-reverse flex pt-1" style={{ 'background-color': 'rgba(0, 0, 0, 0.3)' }}>
+        <main className="z-10 inset-0 flex-1">{children}</main>
+        <footer className="sticky w-full bottom-0 z-50 text-left bg-gray-900 text-white text-xs flex-grow-reverse flex pt-1" style={{ 'background-color': 'rgba(0, 0, 0, 0.3)' }}>
           <IpfsComponent />
           <div className="ml-auto text-center mx-3 flex">
             <a

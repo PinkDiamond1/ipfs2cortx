@@ -1,6 +1,6 @@
 // import IpfsComponent from "../components/Ipfs/ipfs";
 
-import HomeWrapper from './layout'
+import HomeWrapper from '../components/layout'
 import { useEffect, useState } from 'react'
 import { IpfsBox } from '../components/Ipfs/IpfsBox'
 import { S3Box } from '../components/Aws/S3box'
@@ -18,7 +18,9 @@ export default function Home() {
 
   return (
     <HomeWrapper>
-      <div className="flex mr-11">
+      <div 
+      className="flex mr-11 "
+      >
         <IpfsBox>
           <IpfsInput />
           {store.cid && <IpfsLs />}

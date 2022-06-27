@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import { IoSettings } from 'react-icons/io5'
 import { v4 as uuid } from 'uuid';
 import { IpfsCard } from './IpfsCard'
+import { BezierSpinner } from '../Spinner/BezierSpinner'
 
 export default function IpfsLs() {
   const store = useSelector((state) => state.ipfsRedux)
@@ -21,13 +22,21 @@ export default function IpfsLs() {
 
 
   return (
-    <Box>
+    <Box
+    className=''
+    >
       {isLoading ? (
-        <Button isLoading colorScheme="teal" variant="solid">
-          Email
-        </Button>
+        <BezierSpinner></BezierSpinner>
+
       ) : !isError && (
-        <Box>
+        <Box
+        className="relative flex flex-col"
+        >
+          <div
+          className="min-w-fit mr-3 align-text-bottom my-1 font-semibold text-center"
+        >
+          Select files to upload:
+        </div>
           {data.map((file, i) => {
             return <IpfsCard ls={file} key={uuid()} />
           })}

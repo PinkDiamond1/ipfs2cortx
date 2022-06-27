@@ -25,6 +25,8 @@ export const IpfsCard = ({ ls }) => {
     const bg = useColorModeValue('bg-snow-muted font-bold', 'ring-1 ring-slate-900 bg-aqua-muted ')
 
     function onCardClick() {
+        // TODO: uncheck files and remove from currentFiles array
+        if (result.isSuccess) return;
         // Download the clicked file
         trigger({cid: ls.cid }, true)
     }
@@ -43,21 +45,25 @@ export const IpfsCard = ({ ls }) => {
         ? converterBase2(ls['size'], 'B', 'MB').toFixed(3).toString() + ' MB'
         : 'unknown'
 
-        // TODO: use State and condition on selected Cid
+    const [hoverStyle, setHoverStyle] = useState(' bg-opacity-10 hover:cursor-pointer hover:bg-opacity-20 hover:scale-105')
+    useEffect(() => {
+        // Fix the card once it's downloaded
+    if (store.selectedCid.includes(ls.cid)) {
+        setHoverStyle(() => ' bg-opacity-20 scale-110')
+    }
+    },[ls, store])
+
     const hiddenStyle = result.isLoading ? ' opacity-20' : ''
-    const hoverStyle = result.data
-    ? ' hover:cursor-not-allowed bg-opacity-20 scale-105'
-    : ' hover:cursor-pointer hover:bg-opacity-20 hover:scale-105'
     
     console.log("🚀 ~ file: IpfsCard.js ~ line 47 ~ IpfsCard ~ result", result)
     return (
         <>
             <Box
-                className={`${bg} p-3 rounded-xl shadow-xl bg-opacity-10 transform-gpu transition duration-300 ease-in-out ${hoverStyle}`}
+                className={`${bg} p-3 mb-3 rounded-xl shadow-xl transform-gpu transition duration-300 ease-in-out ${hoverStyle}`}
                 onClick={onCardClick}
 
             >
-                {!true &&
+                {result.isLoading &&
                     <div
                         className='fixed z-20 justify-center ml-11'
                     >

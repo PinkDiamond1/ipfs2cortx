@@ -6,7 +6,7 @@ export const ipfsReduxSlice = createSlice({
   initialState: {
     // ipfsDaemon: null,
     cid: null,
-    selectedCid: new Array, 
+    selectedCid: new Array,
     selectedFiles: new Array,
     deployed: false,
   },
@@ -22,16 +22,17 @@ export const ipfsReduxSlice = createSlice({
     setCid: (state, action) => {
       // Get the file information from the current cid.
       const { cid, toast } = action.payload
-      console.log("🚀 ~ file: ipfsSlice.js ~ line 26 ~ cid", cid)
       state.cid = cid
     },
     selectFile: (state, action) => {
-      const { cid, file} = action.payload
+      const { cid, file } = action.payload
       // TODO: check if cid is already in list or make a dict.
-      state.selectedCid.push(cid)
-      console.log("🚀 ~ file: ipfsSlice.js ~ line 31 ~ selectedCid", state.selectedCid.length)
-      state.selectedFiles.push(file)
-      
+      if (!state.selectedCid.includes(cid)) {
+        state.selectedCid.push(cid)
+        console.log("🚀 ~ file: ipfsSlice.js ~ line 31 ~ selectedCid", state.selectedCid.length)
+        state.selectedFiles.push(file)
+      }
+
     },
     deployFile: (state) => {
       // Deploy the file to CORTX
