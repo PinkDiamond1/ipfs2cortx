@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react'
 import { useSelector, useDispatch } from 'react-redux'
 import useMyToast from '../../hooks/useMyToast'
-import { getFile, setCid } from '../../app/ipfsSlice'
+import { reset, setCid } from '../../app/ipfsSlice'
 import isIpfs from 'is-ipfs'
 
 export default function IpfsInput() {
@@ -25,13 +25,15 @@ export default function IpfsInput() {
     if (isIpfs.cid(currentCid)) {
       // const currentCid = 'QmQ2r6iMNpky5f1m4cnm3Yqw8VSvjuKpTcK1X7dBR1LkJF'
       dispatch(setCid({ cid: currentCid }))
+    } else {
+      dispatch(reset())
     }
   }
 
   return (
     <>
       <Box className="m-3 sticky top-28 z-50">
-        {store.currentCid && (
+        {!store.currentCid && (
           <div className="min-w-fit mr-3 align-text-bottom mb-3 font-semibold">
             Paste your IPFS CID:
           </div>
@@ -39,18 +41,18 @@ export default function IpfsInput() {
         <div>
           <InputGroup
             h="7"
-            // className=' fill-charcoal bg-opacity-50'
+          // className=' fill-charcoal bg-opacity-50'
           >
             <InputLeftElement
               h="7"
-              // className='opacity-100'
+            // className='opacity-100'
             >
               <Image alt="ipfsSmallBox" src="/ipfs-logo.svg" h={41} />
             </InputLeftElement>
             <Input
               h="7"
               rounded="xl"
-              fontWeight="semibold"
+              fontWeight='black'
               onChange={handleInput}
               placeholder={store.currentCid || '<myCID>'}
               size="xs"

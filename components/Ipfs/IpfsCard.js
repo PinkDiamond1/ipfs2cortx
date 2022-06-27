@@ -18,6 +18,7 @@ import { selectFile, unselectFile } from '../../app/ipfsSlice'
 import prettyBytes from 'pretty-bytes'
 
 export const IpfsCard = ({ ls, idx }) => {
+  console.log("🚀 ~ file: IpfsCard.js ~ line 21 ~ IpfsCard ~ ls", ls)
   const store = useSelector((state) => state.ipfsRedux)
   const dispatch = useDispatch()
   const toast = useMyToast()
@@ -60,7 +61,7 @@ export const IpfsCard = ({ ls, idx }) => {
   return (
     <>
       <Box
-        className={`${bg} p-3 mb-3 rounded-xl shadow-xl transform-gpu transition duration-300 ease-in-out hover:cursor-pointer ${hoverStyle}`}
+        className={`${bg} p-1 mb-3 rounded-xl shadow-xl transform-gpu transition duration-300 ease-in-out hover:cursor-pointer ${hoverStyle}`}
         onClick={onCardClick}
       >
         {result.isLoading && (
@@ -70,8 +71,8 @@ export const IpfsCard = ({ ls, idx }) => {
             />
           </div>
         )}
-        <div className={'flex flex-row z-10' + hiddenStyle}>
-          <List spacing={spacing} className="mr-3">
+        <div className={'flex flex-row z-10 prose-sm overflow-scroll scrollbar-hide' + hiddenStyle}>
+          <List className="min-w-fit pl-0">
             {attrs.map((attr, i) => {
               return (
                 <ListItem key={uuid()}>
@@ -81,10 +82,15 @@ export const IpfsCard = ({ ls, idx }) => {
               )
             })}
           </List>
-          <List spacing={spacing} className="">
+          <List
+            className=""
+          >
             {attrs.map((attr, i) => {
               return (
-                <ListItem key={uuid()}>
+                <ListItem
+                  key={uuid()}
+                  title={ls[attr]?.length > 11 ? ls[attr] : null}
+                >
                   {(attr === 'size' ? fileSize : ls[attr]) || 'unknown'}
                 </ListItem>
               )

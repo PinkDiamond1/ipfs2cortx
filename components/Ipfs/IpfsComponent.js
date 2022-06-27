@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 // import { setIpfsDaemon } from '../../app/ipfsSlice'
 import useMyToast from '../../hooks/useMyToast'
 
-export function IpfsComponent(props) {
+export function IpfsComponent() {
   const [id, setId] = useState(null)
   const [ipfs, setIpfs] = useState(null)
   const [version, setVersion] = useState(null)
@@ -22,6 +22,7 @@ export function IpfsComponent(props) {
       if (ipfs) return
 
       let node
+      // if (false) {
       if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
         console.log('Running on localhost!')
         node = await create({
@@ -29,7 +30,12 @@ export function IpfsComponent(props) {
           // url: 'http://127.0.0.1:45005/api/v0',
         })
       } else {
-        node = await create4Browser()
+        try {
+
+          node = await create4Browser()
+        } catch (e) {
+          console.error("lockfile again?", e)
+        }
       }
       if (node) {
         const nodeId = await node.id()
@@ -49,16 +55,17 @@ export function IpfsComponent(props) {
     init()
   }, [ipfs, dispatch, toast])
 
-  const boxStyle = 'flex m-3 space-x-2  font-bold text-snow '
+  const boxStyle = 'hidden sm:flex m-3 space-x-2  font-bold text-snow '
 
   if (!ipfs) {
     return <div className={boxStyle}>Connecting to IPFS...</div>
   }
 
   return (
-    <div>
-      <Box className="flex">
-        <Box className={boxStyle}>
+    <div
+    >
+      <Box className="flex flex-row max-w-sm ">
+        <Box className='flex m-3 space-x-2  font-bold text-snow '>
           <p data-test="status">IFPS:</p>
           <p data-test="statusv">{isOnline ? '🟢' : '😡'}</p>
         </Box>
@@ -68,7 +75,14 @@ export function IpfsComponent(props) {
         </Box>
         <Box className={boxStyle}>
           <p data-test="id">ID:</p>
-          <p data-test="idv">{id || '🏴‍☠️'}</p>
+          <div
+            className='line-clamp-1 max-w-xs overflow-clip'
+          >
+            <p
+              data-test="idv"
+              title={id?.length > 11 ? id : null}
+            >{id || '🏴‍☠️'}</p>
+          </div>
         </Box>
       </Box>
     </div>
