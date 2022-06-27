@@ -3,14 +3,15 @@ import { HiMenu, HiX } from 'react-icons/hi'
 import ColorModeToggle from './colorModeToggle'
 import { Box, Text, DarkMode, Button, VStack, Image, useColorModeValue } from '@chakra-ui/react'
 
-
 export default function Header() {
-
   const shadow = useColorModeValue('shadow-2xl', 'shadow-2xl')
-  
+
   return (
     <>
-      <Box as="nav" className={`bg-gradient-to-b from-slate-800 via-slate-900 to-neutral-900 ${shadow} z-30 opacity-100 sticky top-0`}>
+      <Box
+        as="nav"
+        className={`bg-gradient-to-b from-slate-800 via-slate-900 to-neutral-900 ${shadow} z-30 opacity-100 sticky top-0`}
+      >
         <Box className=" mx-auto px-2 sm:px-6 lg:px-8">
           <Box className="relative flex items-center justify-between h-16">
             {/* <Box className="absolute inset-y-0 left-0 flex items-center sm:hidden"></Box> */}

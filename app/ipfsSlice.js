@@ -1,38 +1,51 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { all } from 'it-all'
+
+// remove idx from array
+function arrRemoveByElement(arr, value) {
+  return arr.filter(function (ele) {
+    return ele != value
+  })
+}
+
+// remove idx from array
+function arrRemoveByIdx(arr, idx) {
+  return arr.filter(function (ele, i) {
+    return i != idx
+  })
+}
 
 export const ipfsReduxSlice = createSlice({
   name: 'ipfsRedux',
   initialState: {
-    // ipfsDaemon: null,
     cid: null,
-    selectedCid: new Array,
-    selectedFiles: new Array,
+    selectedIdx: new Array(),
+    selectedFiles: new Array(),
     deployed: false,
   },
   reducers: {
-    // setIpfsDaemon: (state, action) => {
-    //   // Set the ipfs daemon
-    //   const { node, toast } = action.payload
-    //   state.ipfsDaemon = node
-    //   if (node.isOnline()) {
-    //     toast('success', ' IPFS node online 🎉', 'scsIN')
-    //   }
-    // },
     setCid: (state, action) => {
       // Get the file information from the current cid.
-      const { cid, toast } = action.payload
+      const { cid } = action.payload
       state.cid = cid
     },
     selectFile: (state, action) => {
-      const { cid, file } = action.payload
-      // TODO: check if cid is already in list or make a dict.
-      if (!state.selectedCid.includes(cid)) {
-        state.selectedCid.push(cid)
-        console.log("🚀 ~ file: ipfsSlice.js ~ line 31 ~ selectedCid", state.selectedCid.length)
+      const { idx, file } = action.payload
+      if (!state.selectedIdx.includes(idx)) {
+        state.selectedIdx.push(idx)
+        console.log('🚀 ~ file: ipfsSlice.js ~ line 31 ~ selectedIdx', state.selectedIdx.length)
         state.selectedFiles.push(file)
       }
+    },
+    unselectFile: (state, action) => {
+      const { idx } = action.payload
+      console.log('🚀 ~ file: ipfsSlice.js ~ line 52 ~ idx', idx)
 
+      if (state.selectedIdx.includes(idx)) {
+        const file_idx = state.selectedIdx.indexOf(idx)
+        state.selectedFiles = arrRemoveByIdx(state.selectedFiles, file_idx)
+        state.selectedIdx = arrRemoveByElement(state.selectedIdx, idx)
+        console.log('Removed file: ', idx)
+      }
     },
     deployFile: (state) => {
       // Deploy the file to CORTX
@@ -46,6 +59,6 @@ export const ipfsReduxSlice = createSlice({
   },
 })
 
-export const { setIpfsDaemon, setCid, selectFile, deployFile, resetFile } = ipfsReduxSlice.actions
+export const { setCid, selectFile, unselectFile, deployFile, resetFile } = ipfsReduxSlice.actions
 
 export default ipfsReduxSlice.reducer

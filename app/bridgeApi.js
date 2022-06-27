@@ -25,20 +25,20 @@ export const bridgeApi = createApi({
     getCid: build.query({
       async queryFn(args, _api, _extraOptions, fetch) {
         const { cid } = args
-        console.log("🚀 ~ file: bridgeApi.js ~ line 27 ~ queryFn ~ args", args)
+        console.log('🚀 ~ file: bridgeApi.js ~ line 27 ~ queryFn ~ args', args)
         try {
           const ipfs = window?.ipfsDaemon
           let response = await ipfs.get(cid)
           const file = await all(response)
-          console.log("🚀 ~ file: bridgeApi.js ~ line 30 ~ queryFn ~ response", file)
+          console.log('🚀 ~ file: bridgeApi.js ~ line 30 ~ queryFn ~ response', file)
 
           return { data: file }
         } catch (err) {
           console.log(err)
           return { error: err }
         }
-      }
-    })
+      },
+    }),
   }),
 })
 

@@ -34,7 +34,6 @@ Used the [IPFS color pallette](https://github.com/ipfs-shipyard/ipfs-css/blob/ma
 
 [Tailwind animations](https://www.devwares.com/blog/create-animation-with-tailwind-css/)
 
-
 ## IPFS
 
 Two options available to fetch files over IPFS.
@@ -69,7 +68,6 @@ That leaves us with the only option to go ServerSide, which also holds the benef
 Instead of messing with CORS policy, we now try `getServerSideProps()` and as plan B set up a proxy-server API.
 
 We got thisss, 16h to go.
-
 
 THISSS: https://docs.aws.amazon.com/AmazonS3/latest/userguide/example_s3_PutBucketCors_section.html
 
