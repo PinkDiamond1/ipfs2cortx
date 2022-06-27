@@ -9,6 +9,7 @@ import { setIpfsDaemon } from '../../app/ipfsSlice'
 import useMyToast from '../../hooks/useMyToast'
 
 export function IpfsComponent(props) {
+
   const [id, setId] = useState(null)
   const [ipfs, setIpfs] = useState(null)
   const [version, setVersion] = useState(null)
@@ -19,11 +20,13 @@ export function IpfsComponent(props) {
 
   useEffect(() => {
     const init = async () => {
+
+      // TODO:Check if node is offline or ID has changed
       if (ipfs) return
 
       let node
-      if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
-        console.log("Running on localhost!")
+      if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+        console.log('Running on localhost!')
         node = await create({
           url: 'http://localhost:5001/api/v0',
           // url: 'http://127.0.0.1:45005/api/v0',
@@ -32,46 +35,42 @@ export function IpfsComponent(props) {
         node = await create4Browser()
       }
       if (node) {
-
         const nodeId = await node.id()
         const nodeVersion = await node.version()
-        const nodeIsOnline = node.isOnline()
+        const nodeIsOnline = await node.isOnline()
 
         setIpfs(node)
-        setId(nodeId.id)
+        setId(nodeId.id.string)
         setVersion(nodeVersion.version)
         setIsOnline(nodeIsOnline)
 
         dispatch(setIpfsDaemon({ node, toast }))
       }
     }
-
     init()
-  }, [ipfs])
+  }, [ipfs, dispatch, toast])
 
-  // Checks if a new file has been selected. If yes the old link should dissapear
-  const [newFile, setNewFile] = useState(true)
-  useEffect(() => {
-    setNewFile(() => false)
-  }, [props.state])
+  const boxStyle = 'flex m-3 space-x-2  font-bold text-snow '
 
   if (!ipfs) {
-    return <div className="f5 ma0 pb2 aqua fw4 montserrat">Connecting to IPFS...</div>
+    return <div className={boxStyle}>Connecting to IPFS...</div>
   }
 
-  console.log(id)
+
   return (
     <div>
-      <Box className="flex">
-        <Box className="m-3">
-          <h4 data-test="id">ID:</h4>
-          <h4 data-test="version">Version:</h4>
-          <h4 data-test="status">Status:</h4>
+      <Box className="flex ">
+        <Box className={boxStyle}>
+          <p data-test="status">IFPS:</p>
+          <p data-test="statusv">{isOnline ? '🟢' : '😡'}</p>
         </Box>
-        <Box className="m-3">
-          <h4 data-test="id">{id.string}</h4>
-          <h4 data-test="version">{version}</h4>
-          <h4 data-test="status">{isOnline ? 'Online' : 'Offline'}</h4>
+        <Box className={boxStyle}>
+          <p data-test="version">Version:</p>
+          <p data-test="versionv">{version}</p>
+        </Box>
+        <Box className={boxStyle}>
+          <p data-test="id">ID:</p>
+          <p data-test="idv">{id || '🏴‍☠️'}</p>
         </Box>
       </Box>
     </div>

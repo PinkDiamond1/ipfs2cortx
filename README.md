@@ -28,6 +28,13 @@ Make sure your CORTX cluster is running and available. In case of [cloudshare](h
 
 [AWS for React](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/getting-started-react-native.html)
 
+### Color palette
+
+Used the [IPFS color pallette](https://github.com/ipfs-shipyard/ipfs-css/blob/main/theme.json#L2).
+
+[Tailwind animations](https://www.devwares.com/blog/create-animation-with-tailwind-css/)
+
+
 ## IPFS
 
 Two options available to fetch files over IPFS.
