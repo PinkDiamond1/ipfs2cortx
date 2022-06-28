@@ -18,7 +18,7 @@ import { selectFile, unselectFile } from '../../app/ipfsSlice'
 import prettyBytes from 'pretty-bytes'
 
 export const IpfsCard = ({ ls, idx }) => {
-  console.log("🚀 ~ file: IpfsCard.js ~ line 21 ~ IpfsCard ~ ls", ls)
+  console.log('🚀 ~ file: IpfsCard.js ~ line 21 ~ IpfsCard ~ ls', ls)
   const store = useSelector((state) => state.ipfsRedux)
   const dispatch = useDispatch()
   const toast = useMyToast()
@@ -45,15 +45,9 @@ export const IpfsCard = ({ ls, idx }) => {
     }
   }, [result, dispatch, ls, toast, idx])
 
-  const [hoverStyle, setHoverStyle] = useState(' bg-opacity-10 hover:bg-opacity-20 hover:scale-105')
-  useEffect(() => {
-    // Fix the card once it's downloaded
-    if (store.selectedIdx.includes(idx)) {
-      setHoverStyle(() => ' bg-opacity-20 scale-110 hover:bg-opacity-10')
-    } else {
-      setHoverStyle(() => ' bg-opacity-10 hover:bg-opacity-20 hover:scale-105')
-    }
-  }, [ls, store, idx])
+  const hoverStyle = store.selectedIdx.includes(idx)
+    ? ' bg-opacity-20 scale-110 hover:bg-opacity-10'
+    : ' bg-opacity-10 hover:bg-opacity-20 hover:scale-105'
 
   const hiddenStyle = result.isLoading ? ' opacity-20' : ''
   const fileSize = ls['size'] ? prettyBytes(ls['size']) : 'unknown'
@@ -61,7 +55,7 @@ export const IpfsCard = ({ ls, idx }) => {
   return (
     <>
       <Box
-        className={`${bg} p-1 mb-3 rounded-xl shadow-xl transform-gpu transition duration-300 ease-in-out hover:cursor-pointer ${hoverStyle}`}
+        className={`${bg} p-1 mb-3 mx-3 rounded-xl shadow-xl transform-gpu transition duration-300 ease-in-out hover:cursor-pointer ${hoverStyle}`}
         onClick={onCardClick}
       >
         {result.isLoading && (
@@ -71,7 +65,9 @@ export const IpfsCard = ({ ls, idx }) => {
             />
           </div>
         )}
-        <div className={'flex flex-row z-10 prose-sm overflow-scroll scrollbar-hide' + hiddenStyle}>
+        <div
+          className={'flex flex-row z-10 prose-sm overflow-y-scroll scrollbar-hide' + hiddenStyle}
+        >
           <List className="min-w-fit pl-0">
             {attrs.map((attr, i) => {
               return (
@@ -82,15 +78,10 @@ export const IpfsCard = ({ ls, idx }) => {
               )
             })}
           </List>
-          <List
-            className=""
-          >
+          <List className="">
             {attrs.map((attr, i) => {
               return (
-                <ListItem
-                  key={uuid()}
-                  title={ls[attr]?.length > 11 ? ls[attr] : null}
-                >
+                <ListItem key={uuid()} title={ls[attr]?.length > 11 ? ls[attr] : null}>
                   {(attr === 'size' ? fileSize : ls[attr]) || 'unknown'}
                 </ListItem>
               )

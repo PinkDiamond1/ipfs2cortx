@@ -38,18 +38,16 @@ export default function IpfsLs() {
       ) : (
         !isError && (
           <Box className="relative flex flex-col">
-              <div
-              className={store.selectedIdx.length != 0 ? 'opacity-0' : ''}
-              >
-                <p
-                className="min-w-fit mr-3 align-text-bottom my-1 font-semibold text-center"
-                >
+            <div className={store.selectedIdx.length != 0 ? 'opacity-0' : ''}>
+              <p className="min-w-fit mr-3 align-text-bottom my-1 font-semibold text-center">
                 Select files to upload:
               </p>
-              </div> 
-            {data.map((file, i) => {
-              return <IpfsCard ls={file} idx={i} key={uuid()} />
-            })}
+            </div>
+            <div className="flex sm:flex-col overflow-x-scroll scrollbar-hide z-20">
+              {data.map((file, i) => {
+                return <IpfsCard ls={file} idx={i} key={uuid()} />
+              })}
+            </div>
           </Box>
         )
       )}

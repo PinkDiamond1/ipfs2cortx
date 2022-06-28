@@ -32,8 +32,8 @@ export default function IpfsInput() {
 
   return (
     <>
-      <Box className="m-3 sticky top-28 z-50">
-        {store.currentCid && (
+      <Box className="m-3 sticky top-28 z-40">
+        {!store.cid && (
           <div className="min-w-fit mr-3 align-text-bottom mb-3 font-semibold">
             Paste your IPFS CID:
           </div>
@@ -41,20 +41,20 @@ export default function IpfsInput() {
         <div>
           <InputGroup
             h="7"
-          // className=' fill-charcoal bg-opacity-50'
+            // className=' fill-charcoal bg-opacity-50'
           >
             <InputLeftElement
               h="7"
-            // className='opacity-100'
+              // className='opacity-100'
             >
               <Image alt="ipfsSmallBox" src="/ipfs-logo.svg" h={41} />
             </InputLeftElement>
             <Input
               h="7"
               rounded="xl"
-              fontWeight='black'
+              fontWeight="black"
               onChange={handleInput}
-              placeholder={store.currentCid || '<myCID>'}
+              placeholder={store.cid || '<myCID>'}
               size="xs"
               variant="outline"
             ></Input>
