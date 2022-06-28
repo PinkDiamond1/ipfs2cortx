@@ -6,6 +6,10 @@ module.exports = {
   darkMode: ['class'],
   theme: {
     extend: {
+      scale: {
+        500: '5',
+        300: '3',
+      },
       animation: {
         'spin-bezier': 'myspin 1s cubic-bezier(0.9, 0.26, 0.97, 1) infinite',
       },

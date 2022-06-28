@@ -1,15 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/dist/query'
 import { bridgeApi } from './bridgeApi'
-import counterReducer from './counterSlice'
 import ipfsReduxReducer from './ipfsSlice'
 import themeSliceReducer from './themeSlice'
+import cortxReducer from './cortxSlice'
 import { enableMapSet } from 'immer'
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
     ipfsRedux: ipfsReduxReducer,
+    cortx: cortxReducer,
     theme: themeSliceReducer,
     [bridgeApi.reducerPath]: bridgeApi.reducer,
   },

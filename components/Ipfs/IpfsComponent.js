@@ -44,10 +44,9 @@ export function IpfsComponent() {
         })
       } else {
         try {
-
           node = await create4Browser()
         } catch (e) {
-          console.error("lockfile again?", e)
+          console.error('lockfile again?', e)
         }
       }
       if (node) {
@@ -75,10 +74,9 @@ export function IpfsComponent() {
   }
 
   return (
-    <div
-    >
+    <div>
       <Box className="flex flex-row max-w-sm ">
-        <Box className='flex m-3 space-x-2  font-bold text-snow '>
+        <Box className="flex m-3 space-x-2  font-bold text-snow ">
           <p data-test="status">IFPS:</p>
           <p data-test="statusv">{isOnline ? '🟢' : '😡'}</p>
         </Box>
@@ -88,13 +86,10 @@ export function IpfsComponent() {
         </Box>
         <Box className={boxStyle}>
           <p data-test="id">ID:</p>
-          <div
-            className='line-clamp-1 max-w-xs overflow-clip'
-          >
-            <p
-              data-test="idv"
-              title={id?.length > 11 ? id : null}
-            >{id || '🏴‍☠️'}</p>
+          <div className="line-clamp-1 max-w-xs overflow-clip">
+            <p data-test="idv" title={id?.length > 11 ? id : null}>
+              {id || '🏴‍☠️'}
+            </p>
           </div>
         </Box>
       </Box>
